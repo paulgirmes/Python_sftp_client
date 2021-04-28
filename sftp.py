@@ -31,7 +31,7 @@ class Connection(object):
                 elif os.path.exists(os.path.expanduser('~/.ssh/id_dsa')):
                     private_key = '~/.ssh/id_dsa'
                 else:
-                    raise TypeError, "You have not specified a password or key."
+                    raise TypeError("You have not specified a password or key.")
             private_key_file = os.path.expanduser(private_key)
             try:
                 xSx_key = paramiko.RSAKey.from_private_key_file(private_key_file,private_key_pass)
@@ -103,10 +103,10 @@ class Connection(object):
         self._sftp_connect()
         self._sftp.rename(oldpath, newpath)
 
-    def mkdir(self, path, mode=0777):
+    def mkdir(self, path, mode=777):
         """ Create New dir on given path, as given file permission """
         self._sftp_connect()
-        self._sftp.mkdir(path, mode=0777)
+        self._sftp.mkdir(path, mode=777)
         
     def chmod(self, path, mode):
         """ Change the permision of path """
